@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/0.1.0/modelo-do-campus.schema.json",
+  "title": "Modelo do Campus (instantâneo para validação de consistência espacial)",
+  "type": "object",
+  "required": [
+    "versaoContrato",
+    "campus",
+    "objetos"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "versaoContrato": {
+      "const": "0.1.0"
+    },
+    "campus": {
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "crs",
+        "perimetro",
+        "areaDeInteresse"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "comum.schema.json#/$defs/Identificador"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "crs": {
+          "$ref": "comum.schema.json#/$defs/Crs"
+        },
+        "perimetro": {
+          "$ref": "comum.schema.json#/$defs/Poligono"
+        },
+        "areaDeInteresse": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[minX, minY, maxX, maxY] em EPSG:31983 (RN-02)."
+        }
+      }
+    },
+    "objetos": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "edificacao.schema.json"
+          },
+          {
+            "$ref": "via.schema.json"
+          },
+          {
+            "$ref": "ponto-de-interesse.schema.json"
+          },
+          {
+            "$ref": "area-verde.schema.json"
+          }
+        ]
+      }
+    }
+  }
+}

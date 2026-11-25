@@ -1,0 +1,25 @@
+{
+  "tipo": "Via",
+  "id": "urn:upm:campus-hig:via:rua-itambe",
+  "crs": "EPSG:31983",
+  "nome": "Rua Itambé",
+  "classe": "publica",
+  "revestimento": "asfalto",
+  "geometria": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        331215.18,
+        7394998.95
+      ],
+      [
+        331349.58,
+        7395108.15
+      ]
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

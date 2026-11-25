@@ -1,0 +1,22 @@
+{
+  "vocabulario": "situacao",
+  "versao": "0.1.0",
+  "termos": [
+    {
+      "codigo": "ativo",
+      "definicao": "Em uso."
+    },
+    {
+      "codigo": "planejado",
+      "definicao": "Aprovado, ainda não construído."
+    },
+    {
+      "codigo": "em-obra",
+      "definicao": "Em construção ou reforma que altera geometria."
+    },
+    {
+      "codigo": "desativado",
+      "definicao": "Fora de uso; mantido para histórico."
+    }
+  ]
+}

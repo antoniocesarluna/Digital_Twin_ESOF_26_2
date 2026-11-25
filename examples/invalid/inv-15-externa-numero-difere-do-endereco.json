@@ -1,0 +1,59 @@
+{
+  "_esperado": {
+    "codigo": "G1-AGR-015",
+    "regra": "INV-15"
+  },
+  "documento": {
+    "tipo": "Edificacao",
+    "id": "urn:upm:campus-hig:edificacao:ext-maria-antonia-358",
+    "crs": "EPSG:31983",
+    "numeroMapa": 359,
+    "nome": "Núcleo de Inovação e Tecnologia (NIT) / LPP / Bolsas / UPM Digital",
+    "localizacao": "externa",
+    "categoriaUso": "pesquisa",
+    "unidadesOcupantes": [
+      "NIT",
+      "LPP",
+      "Bolsas",
+      "UPM Digital"
+    ],
+    "endereco": {
+      "logradouro": "Rua Maria Antônia",
+      "numero": "358",
+      "municipio": "São Paulo",
+      "uf": "SP"
+    },
+    "situacao": "ativo",
+    "geometria": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            331401.38,
+            7395078.75
+          ],
+          [
+            331416.78,
+            7395078.75
+          ],
+          [
+            331416.78,
+            7395063.35
+          ],
+          [
+            331401.38,
+            7395063.35
+          ],
+          [
+            331401.38,
+            7395078.75
+          ]
+        ]
+      ]
+    },
+    "metadados": {
+      "versao": 1,
+      "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+    }
+  }
+}

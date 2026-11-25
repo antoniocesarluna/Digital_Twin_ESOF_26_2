@@ -1,0 +1,51 @@
+{
+  "_esperado": {
+    "codigo": "G1-SCH-001",
+    "regra": "INV-10"
+  },
+  "documento": {
+    "tipo": "Edificacao",
+    "id": "urn:upm:campus-hig:edificacao:31",
+    "crs": "EPSG:4326",
+    "numeroMapa": 31,
+    "nome": "Faculdade de Computação e Informática (FCI)",
+    "homenageado": "Ed. Paulo Breda Filho",
+    "localizacao": "interna",
+    "categoriaUso": "ensino",
+    "unidadesOcupantes": [
+      "FCI"
+    ],
+    "situacao": "ativo",
+    "geometria": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            331373.38,
+            7394940.15
+          ],
+          [
+            331395.78,
+            7394940.15
+          ],
+          [
+            331395.78,
+            7394914.95
+          ],
+          [
+            331373.38,
+            7394914.95
+          ],
+          [
+            331373.38,
+            7394940.15
+          ]
+        ]
+      ]
+    },
+    "metadados": {
+      "versao": 1,
+      "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+    }
+  }
+}

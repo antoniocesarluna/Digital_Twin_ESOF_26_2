@@ -1,0 +1,61 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "campus": "urn:upm:campus-hig:vocab#",
+    "bldg": "http://www.opengis.net/citygml/building/3.0#",
+    "tran": "http://www.opengis.net/citygml/transportation/3.0#",
+    "veg": "http://www.opengis.net/citygml/vegetation/3.0#",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "schema": "https://schema.org/",
+    "id": "@id",
+    "tipo": "@type",
+    "Edificacao": "campus:Edificacao",
+    "Pavimento": "campus:Pavimento",
+    "Via": "campus:Via",
+    "PontoDeInteresse": "campus:PontoDeInteresse",
+    "AreaVerde": "campus:AreaVerde",
+    "nome": "schema:name",
+    "numeroMapa": "campus:numeroMapa",
+    "homenageado": "campus:homenageado",
+    "localizacao": "campus:localizacao",
+    "categoriaUso": {
+      "@id": "campus:categoriaUso",
+      "@type": "@vocab"
+    },
+    "categoria": {
+      "@id": "campus:categoria",
+      "@type": "@vocab"
+    },
+    "unidadesOcupantes": {
+      "@id": "campus:unidadeOcupante",
+      "@container": "@set"
+    },
+    "pavimentos": {
+      "@id": "campus:possuiPavimento",
+      "@container": "@set"
+    },
+    "numero": "campus:numero",
+    "numeroPortaria": "campus:numeroPortaria",
+    "classe": "campus:classeVia",
+    "revestimento": "campus:revestimento",
+    "cobertura": "campus:coberturaVegetal",
+    "situacao": "campus:situacao",
+    "edificacaoRef": {
+      "@id": "campus:situadoEm",
+      "@type": "@id"
+    },
+    "endereco": "schema:address",
+    "logradouro": "schema:streetAddress",
+    "municipio": "schema:addressLocality",
+    "uf": "schema:addressRegion",
+    "crs": "campus:crs",
+    "geometria": {
+      "@id": "geo:hasGeometry",
+      "@type": "@json"
+    },
+    "metadados": {
+      "@id": "campus:metadados",
+      "@type": "@json"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/0.1.0/via.schema.json",
+  "title": "Via",
+  "type": "object",
+  "required": [
+    "tipo",
+    "id",
+    "crs",
+    "nome",
+    "classe",
+    "geometria"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "tipo": {
+      "const": "Via"
+    },
+    "id": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "crs": {
+      "$ref": "comum.schema.json#/$defs/Crs"
+    },
+    "metadados": {
+      "$ref": "comum.schema.json#/$defs/Metadados"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "classe": {
+      "enum": [
+        "publica",
+        "interna"
+      ]
+    },
+    "revestimento": {
+      "enum": [
+        "asfalto",
+        "concreto",
+        "intertravado",
+        "pedra",
+        "nao-informado"
+      ]
+    },
+    "geometria": {
+      "$ref": "comum.schema.json#/$defs/LinhaPoligonal"
+    }
+  }
+}

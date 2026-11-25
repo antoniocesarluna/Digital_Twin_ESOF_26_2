@@ -1,0 +1,22 @@
+{
+  "vocabulario": "coberturaVegetal",
+  "versao": "0.1.0",
+  "termos": [
+    {
+      "codigo": "arborea",
+      "definicao": "Predomínio de árvores."
+    },
+    {
+      "codigo": "gramado",
+      "definicao": "Predomínio de gramíneas."
+    },
+    {
+      "codigo": "jardim",
+      "definicao": "Canteiros ornamentais."
+    },
+    {
+      "codigo": "misto",
+      "definicao": "Combinação de coberturas."
+    }
+  ]
+}

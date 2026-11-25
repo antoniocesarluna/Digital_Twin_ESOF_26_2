@@ -1,0 +1,45 @@
+{
+  "tipo": "Edificacao",
+  "id": "urn:upm:campus-hig:edificacao:40",
+  "crs": "EPSG:31983",
+  "numeroMapa": 40,
+  "nome": "Universidade Presbiteriana Mackenzie (UPM)",
+  "homenageado": "Ed. Antônio Bandeira Trajano",
+  "localizacao": "interna",
+  "categoriaUso": "ensino",
+  "unidadesOcupantes": [
+    "UPM"
+  ],
+  "situacao": "ativo",
+  "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          331408.38,
+          7394881.35
+        ],
+        [
+          331425.18,
+          7394881.35
+        ],
+        [
+          331425.18,
+          7394864.55
+        ],
+        [
+          331408.38,
+          7394864.55
+        ],
+        [
+          331408.38,
+          7394881.35
+        ]
+      ]
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

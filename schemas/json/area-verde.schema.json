@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/0.1.0/area-verde.schema.json",
+  "title": "Área Verde",
+  "type": "object",
+  "required": [
+    "tipo",
+    "id",
+    "crs",
+    "nome",
+    "cobertura",
+    "geometria"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "tipo": {
+      "const": "AreaVerde"
+    },
+    "id": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "crs": {
+      "$ref": "comum.schema.json#/$defs/Crs"
+    },
+    "metadados": {
+      "$ref": "comum.schema.json#/$defs/Metadados"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "cobertura": {
+      "enum": [
+        "arborea",
+        "gramado",
+        "jardim",
+        "misto"
+      ]
+    },
+    "geometria": {
+      "$ref": "comum.schema.json#/$defs/Poligono"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "tipo": "Edificacao",
+  "id": "urn:upm:campus-hig:edificacao:09",
+  "crs": "EPSG:31983",
+  "numeroMapa": 9,
+  "nome": "Faculdade de Arquitetura e Urbanismo (FAU)",
+  "homenageado": "Ed. Cristiano Stockler das Neves",
+  "localizacao": "interna",
+  "categoriaUso": "ensino",
+  "unidadesOcupantes": [
+    "FAU"
+  ],
+  "situacao": "ativo",
+  "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          331303.38,
+          7395046.55
+        ],
+        [
+          331331.38,
+          7395046.55
+        ],
+        [
+          331331.38,
+          7395018.55
+        ],
+        [
+          331303.38,
+          7395018.55
+        ],
+        [
+          331303.38,
+          7395046.55
+        ]
+      ]
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

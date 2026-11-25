@@ -1,0 +1,126 @@
+{
+  "_esperado": {
+    "codigo": "G1-AGR-005",
+    "regra": "INV-05"
+  },
+  "documento": {
+    "tipo": "Edificacao",
+    "id": "urn:upm:campus-hig:edificacao:41",
+    "crs": "EPSG:31983",
+    "numeroMapa": 41,
+    "nome": "Edifício João Calvino",
+    "homenageado": "Ed. João Calvino",
+    "localizacao": "interna",
+    "categoriaUso": "administrativo",
+    "unidadesOcupantes": [
+      "Reitoria e Pró-Reitorias"
+    ],
+    "endereco": {
+      "logradouro": "Rua da Consolação",
+      "numero": "896",
+      "municipio": "São Paulo",
+      "uf": "SP"
+    },
+    "situacao": "ativo",
+    "geometria": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            331446.18,
+            7394875.75
+          ],
+          [
+            331471.38,
+            7394875.75
+          ],
+          [
+            331471.38,
+            7394850.55
+          ],
+          [
+            331446.18,
+            7394850.55
+          ],
+          [
+            331446.18,
+            7394875.75
+          ]
+        ]
+      ]
+    },
+    "pavimentos": [
+      {
+        "id": "urn:upm:campus-hig:pavimento:41-0",
+        "numero": 8,
+        "nome": "Térreo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331446.18,
+                7394875.75
+              ],
+              [
+                331471.38,
+                7394875.75
+              ],
+              [
+                331471.38,
+                7394850.55
+              ],
+              [
+                331446.18,
+                7394850.55
+              ],
+              [
+                331446.18,
+                7394875.75
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "urn:upm:campus-hig:pavimento:41-8",
+        "numero": 8,
+        "nome": "8º pavimento",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331446.18,
+                7394875.75
+              ],
+              [
+                331471.38,
+                7394875.75
+              ],
+              [
+                331471.38,
+                7394850.55
+              ],
+              [
+                331446.18,
+                7394850.55
+              ],
+              [
+                331446.18,
+                7394875.75
+              ]
+            ]
+          ]
+        },
+        "unidadesOcupantes": [
+          "Coordenadoria Geral de Pós-Graduação Stricto Sensu (PRPG)"
+        ]
+      }
+    ],
+    "metadados": {
+      "versao": 1,
+      "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+    }
+  }
+}

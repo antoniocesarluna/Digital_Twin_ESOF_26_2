@@ -1,0 +1,19 @@
+{
+  "tipo": "PontoDeInteresse",
+  "id": "urn:upm:campus-hig:poi:achados-e-perdidos",
+  "crs": "EPSG:31983",
+  "nome": "Achados e Perdidos",
+  "categoria": "achados-e-perdidos",
+  "edificacaoRef": "urn:upm:campus-hig:edificacao:35",
+  "geometria": {
+    "type": "Point",
+    "coordinates": [
+      331402.5,
+      7394872.11
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/0.1.0/ponto-de-interesse.schema.json",
+  "title": "Ponto de Interesse",
+  "type": "object",
+  "required": [
+    "tipo",
+    "id",
+    "crs",
+    "nome",
+    "categoria",
+    "geometria"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "tipo": {
+      "const": "PontoDeInteresse"
+    },
+    "id": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "crs": {
+      "$ref": "comum.schema.json#/$defs/Crs"
+    },
+    "metadados": {
+      "$ref": "comum.schema.json#/$defs/Metadados"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "categoria": {
+      "enum": [
+        "portaria",
+        "atendimento",
+        "achados-e-perdidos",
+        "alimentacao",
+        "auditorio",
+        "quadra-esportiva",
+        "servico"
+      ]
+    },
+    "numeroPortaria": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "endereco": {
+      "$ref": "comum.schema.json#/$defs/Endereco"
+    },
+    "edificacaoRef": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "geometria": {
+      "$ref": "comum.schema.json#/$defs/Ponto"
+    }
+  },
+  "if": {
+    "required": [
+      "categoria"
+    ],
+    "properties": {
+      "categoria": {
+        "const": "portaria"
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "numeroPortaria",
+      "endereco"
+    ]
+  }
+}

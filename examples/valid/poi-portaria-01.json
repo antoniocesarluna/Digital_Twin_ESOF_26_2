@@ -1,0 +1,25 @@
+{
+  "tipo": "PontoDeInteresse",
+  "id": "urn:upm:campus-hig:poi:portaria-01",
+  "crs": "EPSG:31983",
+  "nome": "Portaria 01",
+  "categoria": "portaria",
+  "numeroPortaria": 1,
+  "endereco": {
+    "logradouro": "Rua Itambé",
+    "numero": "185",
+    "municipio": "São Paulo",
+    "uf": "SP"
+  },
+  "geometria": {
+    "type": "Point",
+    "coordinates": [
+      331232.54,
+      7395003.15
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

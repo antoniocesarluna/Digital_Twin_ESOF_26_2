@@ -1,0 +1,38 @@
+{
+  "tipo": "AreaVerde",
+  "id": "urn:upm:campus-hig:area-verde:bosque-norte",
+  "crs": "EPSG:31983",
+  "nome": "Bosque do setor norte",
+  "cobertura": "arborea",
+  "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          331328.58,
+          7395071.75
+        ],
+        [
+          331350.98,
+          7395071.75
+        ],
+        [
+          331350.98,
+          7395049.35
+        ],
+        [
+          331328.58,
+          7395049.35
+        ],
+        [
+          331328.58,
+          7395071.75
+        ]
+      ]
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

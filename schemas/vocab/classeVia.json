@@ -1,0 +1,14 @@
+{
+  "vocabulario": "classeVia",
+  "versao": "0.1.0",
+  "termos": [
+    {
+      "codigo": "publica",
+      "definicao": "Logradouro público que delimita ou dá acesso ao campus."
+    },
+    {
+      "codigo": "interna",
+      "definicao": "Circulação interna de pedestres ou veículos dentro do perímetro."
+    }
+  ]
+}

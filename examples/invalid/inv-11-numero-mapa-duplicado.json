@@ -1,0 +1,610 @@
+{
+  "_esperado": {
+    "codigo": "G1-ESP-011",
+    "regra": "INV-11"
+  },
+  "documento": {
+    "versaoContrato": "0.1.0",
+    "campus": {
+      "id": "urn:upm:campus-hig:campus:higienopolis",
+      "nome": "Campus Higienópolis",
+      "crs": "EPSG:31983",
+      "perimetro": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              331222.18,
+              7394994.75
+            ],
+            [
+              331353.78,
+              7395101.15
+            ],
+            [
+              331548.38,
+              7394857.55
+            ],
+            [
+              331272.58,
+              7394823.95
+            ],
+            [
+              331222.18,
+              7394994.75
+            ]
+          ]
+        ]
+      },
+      "areaDeInteresse": [
+        331188.58,
+        7394797.35,
+        331762.02,
+        7395122.15
+      ]
+    },
+    "objetos": [
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:31",
+        "crs": "EPSG:31983",
+        "numeroMapa": 31,
+        "nome": "Faculdade de Computação e Informática (FCI)",
+        "homenageado": "Ed. Paulo Breda Filho",
+        "localizacao": "interna",
+        "categoriaUso": "ensino",
+        "unidadesOcupantes": [
+          "FCI"
+        ],
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331373.38,
+                7394940.15
+              ],
+              [
+                331395.78,
+                7394940.15
+              ],
+              [
+                331395.78,
+                7394914.95
+              ],
+              [
+                331373.38,
+                7394914.95
+              ],
+              [
+                331373.38,
+                7394940.15
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:41",
+        "crs": "EPSG:31983",
+        "numeroMapa": 41,
+        "nome": "Edifício João Calvino",
+        "homenageado": "Ed. João Calvino",
+        "localizacao": "interna",
+        "categoriaUso": "administrativo",
+        "unidadesOcupantes": [
+          "Reitoria e Pró-Reitorias"
+        ],
+        "endereco": {
+          "logradouro": "Rua da Consolação",
+          "numero": "896",
+          "municipio": "São Paulo",
+          "uf": "SP"
+        },
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331446.18,
+                7394875.75
+              ],
+              [
+                331471.38,
+                7394875.75
+              ],
+              [
+                331471.38,
+                7394850.55
+              ],
+              [
+                331446.18,
+                7394850.55
+              ],
+              [
+                331446.18,
+                7394875.75
+              ]
+            ]
+          ]
+        },
+        "pavimentos": [
+          {
+            "id": "urn:upm:campus-hig:pavimento:41-0",
+            "numero": 0,
+            "nome": "Térreo",
+            "geometria": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    331446.18,
+                    7394875.75
+                  ],
+                  [
+                    331471.38,
+                    7394875.75
+                  ],
+                  [
+                    331471.38,
+                    7394850.55
+                  ],
+                  [
+                    331446.18,
+                    7394850.55
+                  ],
+                  [
+                    331446.18,
+                    7394875.75
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "id": "urn:upm:campus-hig:pavimento:41-8",
+            "numero": 8,
+            "nome": "8º pavimento",
+            "geometria": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    331446.18,
+                    7394875.75
+                  ],
+                  [
+                    331471.38,
+                    7394875.75
+                  ],
+                  [
+                    331471.38,
+                    7394850.55
+                  ],
+                  [
+                    331446.18,
+                    7394850.55
+                  ],
+                  [
+                    331446.18,
+                    7394875.75
+                  ]
+                ]
+              ]
+            },
+            "unidadesOcupantes": [
+              "Coordenadoria Geral de Pós-Graduação Stricto Sensu (PRPG)"
+            ]
+          }
+        ],
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:09",
+        "crs": "EPSG:31983",
+        "numeroMapa": 9,
+        "nome": "Faculdade de Arquitetura e Urbanismo (FAU)",
+        "homenageado": "Ed. Cristiano Stockler das Neves",
+        "localizacao": "interna",
+        "categoriaUso": "ensino",
+        "unidadesOcupantes": [
+          "FAU"
+        ],
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331303.38,
+                7395046.55
+              ],
+              [
+                331331.38,
+                7395046.55
+              ],
+              [
+                331331.38,
+                7395018.55
+              ],
+              [
+                331303.38,
+                7395018.55
+              ],
+              [
+                331303.38,
+                7395046.55
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:40",
+        "crs": "EPSG:31983",
+        "numeroMapa": 40,
+        "nome": "Universidade Presbiteriana Mackenzie (UPM)",
+        "homenageado": "Ed. Antônio Bandeira Trajano",
+        "localizacao": "interna",
+        "categoriaUso": "ensino",
+        "unidadesOcupantes": [
+          "UPM"
+        ],
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331408.38,
+                7394881.35
+              ],
+              [
+                331425.18,
+                7394881.35
+              ],
+              [
+                331425.18,
+                7394864.55
+              ],
+              [
+                331408.38,
+                7394864.55
+              ],
+              [
+                331408.38,
+                7394881.35
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:ext-maria-antonia-358",
+        "crs": "EPSG:31983",
+        "numeroMapa": 358,
+        "nome": "Núcleo de Inovação e Tecnologia (NIT) / LPP / Bolsas / UPM Digital",
+        "localizacao": "externa",
+        "categoriaUso": "pesquisa",
+        "unidadesOcupantes": [
+          "NIT",
+          "LPP",
+          "Bolsas",
+          "UPM Digital"
+        ],
+        "endereco": {
+          "logradouro": "Rua Maria Antônia",
+          "numero": "358",
+          "municipio": "São Paulo",
+          "uf": "SP"
+        },
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331401.38,
+                7395078.75
+              ],
+              [
+                331416.78,
+                7395078.75
+              ],
+              [
+                331416.78,
+                7395063.35
+              ],
+              [
+                331401.38,
+                7395063.35
+              ],
+              [
+                331401.38,
+                7395078.75
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:ext-maria-borba-40",
+        "crs": "EPSG:31983",
+        "numeroMapa": 40,
+        "nome": "Pós-Graduação Lato Sensu",
+        "homenageado": "Ed. Rev. Alexander Latimer Blackford",
+        "localizacao": "externa",
+        "categoriaUso": "ensino",
+        "unidadesOcupantes": [
+          "Pós-Graduação Lato Sensu"
+        ],
+        "endereco": {
+          "logradouro": "Rua Maria Borba",
+          "numero": "40",
+          "municipio": "São Paulo",
+          "uf": "SP"
+        },
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331605.78,
+                7394926.15
+              ],
+              [
+                331630.98,
+                7394926.15
+              ],
+              [
+                331630.98,
+                7394906.55
+              ],
+              [
+                331605.78,
+                7394906.55
+              ],
+              [
+                331605.78,
+                7394926.15
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Via",
+        "id": "urn:upm:campus-hig:via:rua-da-consolacao",
+        "crs": "EPSG:31983",
+        "nome": "Rua da Consolação",
+        "classe": "publica",
+        "revestimento": "asfalto",
+        "geometria": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              331266.98,
+              7394815.55
+            ],
+            [
+              331555.38,
+              7394849.15
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Via",
+        "id": "urn:upm:campus-hig:via:rua-itambe",
+        "crs": "EPSG:31983",
+        "nome": "Rua Itambé",
+        "classe": "publica",
+        "revestimento": "asfalto",
+        "geometria": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              331215.18,
+              7394998.95
+            ],
+            [
+              331349.58,
+              7395108.15
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "PontoDeInteresse",
+        "id": "urn:upm:campus-hig:poi:portaria-07",
+        "crs": "EPSG:31983",
+        "nome": "Portaria 07",
+        "categoria": "portaria",
+        "numeroPortaria": 7,
+        "endereco": {
+          "logradouro": "Rua da Consolação",
+          "numero": "930",
+          "municipio": "São Paulo",
+          "uf": "SP"
+        },
+        "geometria": {
+          "type": "Point",
+          "coordinates": [
+            331444.22,
+            7394844.67
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "PontoDeInteresse",
+        "id": "urn:upm:campus-hig:poi:portaria-01",
+        "crs": "EPSG:31983",
+        "nome": "Portaria 01",
+        "categoria": "portaria",
+        "numeroPortaria": 1,
+        "endereco": {
+          "logradouro": "Rua Itambé",
+          "numero": "185",
+          "municipio": "São Paulo",
+          "uf": "SP"
+        },
+        "geometria": {
+          "type": "Point",
+          "coordinates": [
+            331232.54,
+            7395003.15
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "PontoDeInteresse",
+        "id": "urn:upm:campus-hig:poi:achados-e-perdidos",
+        "crs": "EPSG:31983",
+        "nome": "Achados e Perdidos",
+        "categoria": "achados-e-perdidos",
+        "edificacaoRef": "urn:upm:campus-hig:edificacao:35",
+        "geometria": {
+          "type": "Point",
+          "coordinates": [
+            331402.5,
+            7394872.11
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "AreaVerde",
+        "id": "urn:upm:campus-hig:area-verde:bosque-norte",
+        "crs": "EPSG:31983",
+        "nome": "Bosque do setor norte",
+        "cobertura": "arborea",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331328.58,
+                7395071.75
+              ],
+              [
+                331350.98,
+                7395071.75
+              ],
+              [
+                331350.98,
+                7395049.35
+              ],
+              [
+                331328.58,
+                7395049.35
+              ],
+              [
+                331328.58,
+                7395071.75
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      },
+      {
+        "tipo": "Edificacao",
+        "id": "urn:upm:campus-hig:edificacao:09-bis",
+        "crs": "EPSG:31983",
+        "numeroMapa": 9,
+        "nome": "Faculdade de Arquitetura e Urbanismo (FAU)",
+        "homenageado": "Ed. Cristiano Stockler das Neves",
+        "localizacao": "interna",
+        "categoriaUso": "ensino",
+        "unidadesOcupantes": [
+          "FAU"
+        ],
+        "situacao": "ativo",
+        "geometria": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                331303.38,
+                7395046.55
+              ],
+              [
+                331331.38,
+                7395046.55
+              ],
+              [
+                331331.38,
+                7395018.55
+              ],
+              [
+                331303.38,
+                7395018.55
+              ],
+              [
+                331303.38,
+                7395046.55
+              ]
+            ]
+          ]
+        },
+        "metadados": {
+          "versao": 1,
+          "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+        }
+      }
+    ]
+  }
+}

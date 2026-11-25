@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/0.1.0/edificacao.schema.json",
+  "title": "Edificação",
+  "type": "object",
+  "required": [
+    "tipo",
+    "id",
+    "crs",
+    "numeroMapa",
+    "nome",
+    "localizacao",
+    "categoriaUso",
+    "situacao",
+    "geometria"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "tipo": {
+      "const": "Edificacao"
+    },
+    "id": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "crs": {
+      "$ref": "comum.schema.json#/$defs/Crs"
+    },
+    "metadados": {
+      "$ref": "comum.schema.json#/$defs/Metadados"
+    },
+    "numeroMapa": {
+      "$ref": "comum.schema.json#/$defs/NumeroMapa"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 2
+    },
+    "homenageado": {
+      "type": "string",
+      "description": "Nome do edifício (ex.: Ed. Paulo Breda Filho)."
+    },
+    "localizacao": {
+      "enum": [
+        "interna",
+        "externa"
+      ]
+    },
+    "categoriaUso": {
+      "enum": [
+        "ensino",
+        "pesquisa",
+        "administrativo",
+        "cultural",
+        "religioso",
+        "esportivo",
+        "alimentacao",
+        "educacao-basica",
+        "misto"
+      ]
+    },
+    "unidadesOcupantes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "endereco": {
+      "$ref": "comum.schema.json#/$defs/Endereco"
+    },
+    "situacao": {
+      "$ref": "comum.schema.json#/$defs/Situacao"
+    },
+    "geometria": {
+      "$ref": "comum.schema.json#/$defs/Poligono"
+    },
+    "pavimentos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Pavimento"
+      }
+    }
+  },
+  "$defs": {
+    "Pavimento": {
+      "type": "object",
+      "required": [
+        "id",
+        "numero",
+        "nome",
+        "geometria"
+      ],
+      "additionalProperties": false,
+      "description": "Entidade interna do agregado Edificação (andar).",
+      "properties": {
+        "id": {
+          "$ref": "comum.schema.json#/$defs/Identificador"
+        },
+        "numero": {
+          "type": "integer",
+          "minimum": -5,
+          "maximum": 60
+        },
+        "nome": {
+          "type": "string"
+        },
+        "geometria": {
+          "$ref": "comum.schema.json#/$defs/Poligono"
+        },
+        "unidadesOcupantes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": {
+      "localizacao": {
+        "const": "externa"
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "endereco"
+    ]
+  }
+}

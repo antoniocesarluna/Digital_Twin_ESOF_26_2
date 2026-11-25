@@ -1,0 +1,26 @@
+{
+  "vocabulario": "revestimento",
+  "versao": "0.1.0",
+  "termos": [
+    {
+      "codigo": "asfalto",
+      "definicao": "Revestimento asfáltico."
+    },
+    {
+      "codigo": "concreto",
+      "definicao": "Piso de concreto."
+    },
+    {
+      "codigo": "intertravado",
+      "definicao": "Blocos intertravados."
+    },
+    {
+      "codigo": "pedra",
+      "definicao": "Pedra ou paralelepípedo."
+    },
+    {
+      "codigo": "nao-informado",
+      "definicao": "Revestimento ainda não levantado."
+    }
+  ]
+}

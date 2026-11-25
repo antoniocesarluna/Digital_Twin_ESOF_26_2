@@ -1,0 +1,42 @@
+{
+  "vocabulario": "categoriaUso",
+  "versao": "0.1.0",
+  "termos": [
+    {
+      "codigo": "ensino",
+      "definicao": "Edificação destinada predominantemente a aulas de graduação ou pós-graduação."
+    },
+    {
+      "codigo": "pesquisa",
+      "definicao": "Laboratórios e núcleos de pesquisa e inovação."
+    },
+    {
+      "codigo": "administrativo",
+      "definicao": "Serviços administrativos, atendimento e apoio."
+    },
+    {
+      "codigo": "cultural",
+      "definicao": "Centros culturais, históricos, bibliotecas e auditórios."
+    },
+    {
+      "codigo": "religioso",
+      "definicao": "Capela e espaços de culto."
+    },
+    {
+      "codigo": "esportivo",
+      "definicao": "Ginásios e instalações esportivas cobertas."
+    },
+    {
+      "codigo": "alimentacao",
+      "definicao": "Lanchonetes e restaurantes."
+    },
+    {
+      "codigo": "educacao-basica",
+      "definicao": "Edificações do Colégio Presbiteriano Mackenzie."
+    },
+    {
+      "codigo": "misto",
+      "definicao": "Edificação com mais de um uso relevante."
+    }
+  ]
+}

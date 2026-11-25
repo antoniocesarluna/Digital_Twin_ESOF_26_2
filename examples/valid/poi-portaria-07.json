@@ -1,0 +1,25 @@
+{
+  "tipo": "PontoDeInteresse",
+  "id": "urn:upm:campus-hig:poi:portaria-07",
+  "crs": "EPSG:31983",
+  "nome": "Portaria 07",
+  "categoria": "portaria",
+  "numeroPortaria": 7,
+  "endereco": {
+    "logradouro": "Rua da Consolação",
+    "numero": "930",
+    "municipio": "São Paulo",
+    "uf": "SP"
+  },
+  "geometria": {
+    "type": "Point",
+    "coordinates": [
+      331444.22,
+      7394844.67
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

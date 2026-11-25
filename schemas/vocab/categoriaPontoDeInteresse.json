@@ -1,0 +1,34 @@
+{
+  "vocabulario": "categoriaPontoDeInteresse",
+  "versao": "0.1.0",
+  "termos": [
+    {
+      "codigo": "portaria",
+      "definicao": "Acesso controlado ao campus, identificado por número e endereço."
+    },
+    {
+      "codigo": "atendimento",
+      "definicao": "Balcão de atendimento ao público."
+    },
+    {
+      "codigo": "achados-e-perdidos",
+      "definicao": "Ponto de guarda de objetos encontrados."
+    },
+    {
+      "codigo": "alimentacao",
+      "definicao": "Ponto de venda de alimentos."
+    },
+    {
+      "codigo": "auditorio",
+      "definicao": "Espaço de eventos dentro de uma edificação."
+    },
+    {
+      "codigo": "quadra-esportiva",
+      "definicao": "Quadra descoberta para prática esportiva."
+    },
+    {
+      "codigo": "servico",
+      "definicao": "Outro serviço pontual de apoio."
+    }
+  ]
+}

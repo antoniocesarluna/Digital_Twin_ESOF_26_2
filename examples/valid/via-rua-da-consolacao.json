@@ -1,0 +1,25 @@
+{
+  "tipo": "Via",
+  "id": "urn:upm:campus-hig:via:rua-da-consolacao",
+  "crs": "EPSG:31983",
+  "nome": "Rua da Consolação",
+  "classe": "publica",
+  "revestimento": "asfalto",
+  "geometria": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        331266.98,
+        7394815.55
+      ],
+      [
+        331555.38,
+        7394849.15
+      ]
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "tipo": "Edificacao",
+  "id": "urn:upm:campus-hig:edificacao:ext-maria-borba-40",
+  "crs": "EPSG:31983",
+  "numeroMapa": 40,
+  "nome": "Pós-Graduação Lato Sensu",
+  "homenageado": "Ed. Rev. Alexander Latimer Blackford",
+  "localizacao": "externa",
+  "categoriaUso": "ensino",
+  "unidadesOcupantes": [
+    "Pós-Graduação Lato Sensu"
+  ],
+  "endereco": {
+    "logradouro": "Rua Maria Borba",
+    "numero": "40",
+    "municipio": "São Paulo",
+    "uf": "SP"
+  },
+  "situacao": "ativo",
+  "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          331605.78,
+          7394926.15
+        ],
+        [
+          331630.98,
+          7394926.15
+        ],
+        [
+          331630.98,
+          7394906.55
+        ],
+        [
+          331605.78,
+          7394906.55
+        ],
+        [
+          331605.78,
+          7394926.15
+        ]
+      ]
+    ]
+  },
+  "metadados": {
+    "versao": 1,
+    "fonte": "Mapa Campus Higienópolis 2024 (geometria esquemática)"
+  }
+}

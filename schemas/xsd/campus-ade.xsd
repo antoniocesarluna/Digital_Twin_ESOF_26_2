@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Campus Domain ADE v0.1.0: atributos do domínio acrescentados às classes CityGML 3.0.
+     Os elementos abaixo são usados dentro de bldg:Building, bldg:Storey, tran:Road,
+     veg:PlantCover e gen:GenericOccupiedSpace. Os schemas oficiais da OGC são
+     referenciados (não copiados) no perfil completo validado no CI (Sprint 3). -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:campus="urn:upm:campus-hig:ade:0.1.0"
+           targetNamespace="urn:upm:campus-hig:ade:0.1.0"
+           elementFormDefault="qualified" version="0.1.0">
+  <xs:simpleType name="NumeroMapaType">
+    <xs:restriction base="xs:positiveInteger"><xs:maxInclusive value="999"/></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LocalizacaoType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="interna"/><xs:enumeration value="externa"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CategoriaUsoType">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="ensino"/>
+        <xs:enumeration value="pesquisa"/>
+        <xs:enumeration value="administrativo"/>
+        <xs:enumeration value="cultural"/>
+        <xs:enumeration value="religioso"/>
+        <xs:enumeration value="esportivo"/>
+        <xs:enumeration value="alimentacao"/>
+        <xs:enumeration value="educacao-basica"/>
+        <xs:enumeration value="misto"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="numeroMapa" type="campus:NumeroMapaType"/>
+  <xs:element name="localizacao" type="campus:LocalizacaoType"/>
+  <xs:element name="categoriaUso" type="campus:CategoriaUsoType"/>
+  <xs:element name="homenageado" type="xs:string"/>
+  <xs:element name="unidadeOcupante" type="xs:string"/>
+</xs:schema>
