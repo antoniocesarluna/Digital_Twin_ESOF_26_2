@@ -1,33 +1,44 @@
 {
+  "$schema": "https://gemeo-campus.example/schemas/1.0.0/vocabulario.schema.json",
   "vocabulario": "categoriaPontoDeInteresse",
-  "versao": "0.1.0",
+  "versao": "1.0.0",
+  "usadoEm": [
+    "PontoDeInteresse.categoria"
+  ],
   "termos": [
     {
       "codigo": "portaria",
+      "rotulo": "Portaria",
       "definicao": "Acesso controlado ao campus, identificado por número e endereço."
     },
     {
       "codigo": "atendimento",
+      "rotulo": "Atendimento",
       "definicao": "Balcão de atendimento ao público."
     },
     {
       "codigo": "achados-e-perdidos",
+      "rotulo": "Achados e Perdidos",
       "definicao": "Ponto de guarda de objetos encontrados."
     },
     {
       "codigo": "alimentacao",
+      "rotulo": "Alimentação",
       "definicao": "Ponto de venda de alimentos."
     },
     {
       "codigo": "auditorio",
+      "rotulo": "Auditório",
       "definicao": "Espaço de eventos dentro de uma edificação."
     },
     {
       "codigo": "quadra-esportiva",
+      "rotulo": "Quadra esportiva",
       "definicao": "Quadra descoberta para prática esportiva."
     },
     {
       "codigo": "servico",
+      "rotulo": "Serviço",
       "definicao": "Outro serviço pontual de apoio."
     }
   ]

@@ -1,0 +1,53 @@
+{
+  "versao": "1.0.0",
+  "vocabularios": [
+    {
+      "nome": "categoriaUso",
+      "arquivo": "categoriaUso.json",
+      "usadoEm": [
+        "Edificacao.categoriaUso"
+      ],
+      "termos": 9
+    },
+    {
+      "nome": "categoriaPontoDeInteresse",
+      "arquivo": "categoriaPontoDeInteresse.json",
+      "usadoEm": [
+        "PontoDeInteresse.categoria"
+      ],
+      "termos": 7
+    },
+    {
+      "nome": "classeVia",
+      "arquivo": "classeVia.json",
+      "usadoEm": [
+        "Via.classe"
+      ],
+      "termos": 2
+    },
+    {
+      "nome": "revestimento",
+      "arquivo": "revestimento.json",
+      "usadoEm": [
+        "Via.revestimento"
+      ],
+      "termos": 5
+    },
+    {
+      "nome": "coberturaVegetal",
+      "arquivo": "coberturaVegetal.json",
+      "usadoEm": [
+        "AreaVerde.cobertura"
+      ],
+      "termos": 4
+    },
+    {
+      "nome": "situacao",
+      "arquivo": "situacao.json",
+      "usadoEm": [
+        "Edificacao.situacao"
+      ],
+      "termos": 4
+    }
+  ]
+}

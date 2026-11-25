@@ -1,21 +1,29 @@
 {
+  "$schema": "https://gemeo-campus.example/schemas/1.0.0/vocabulario.schema.json",
   "vocabulario": "situacao",
-  "versao": "0.1.0",
+  "versao": "1.0.0",
+  "usadoEm": [
+    "Edificacao.situacao"
+  ],
   "termos": [
     {
       "codigo": "ativo",
-      "definicao": "Em uso."
+      "rotulo": "Ativo",
+      "definicao": "Em uso regular pela universidade."
     },
     {
       "codigo": "planejado",
+      "rotulo": "Planejado",
       "definicao": "Aprovado, ainda não construído."
     },
     {
       "codigo": "em-obra",
+      "rotulo": "Em obra",
       "definicao": "Em construção ou reforma que altera geometria."
     },
     {
       "codigo": "desativado",
+      "rotulo": "Desativado",
       "definicao": "Fora de uso; mantido para histórico."
     }
   ]

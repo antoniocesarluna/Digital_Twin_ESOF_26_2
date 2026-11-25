@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/1.0.0/relatorio-de-validacao.schema.json",
+  "title": "Relatório de validação do Campus Domain (RF-06)",
+  "description": "Devolvido por validar_documento() e por POST /validacao; o G3 o repassa na própria API.",
+  "type": "object",
+  "required": [
+    "valido",
+    "erros"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "valido": {
+      "type": "boolean"
+    },
+    "erros": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "codigo",
+          "regra",
+          "local",
+          "mensagem"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "pattern": "^G1-[A-Z]{3}-[0-9]{3}$"
+          },
+          "regra": {
+            "type": "string",
+            "pattern": "^(INV-[0-9]{2}|SCHEMA)$"
+          },
+          "local": {
+            "type": "string",
+            "description": "JSON Pointer do ponto do documento com problema."
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem em português com os termos do glossário."
+          }
+        }
+      }
+    }
+  }
+}

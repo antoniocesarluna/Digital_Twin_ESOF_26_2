@@ -1,25 +1,34 @@
 {
+  "$schema": "https://gemeo-campus.example/schemas/1.0.0/vocabulario.schema.json",
   "vocabulario": "revestimento",
-  "versao": "0.1.0",
+  "versao": "1.0.0",
+  "usadoEm": [
+    "Via.revestimento"
+  ],
   "termos": [
     {
       "codigo": "asfalto",
+      "rotulo": "Asfalto",
       "definicao": "Revestimento asfáltico."
     },
     {
       "codigo": "concreto",
+      "rotulo": "Concreto",
       "definicao": "Piso de concreto."
     },
     {
       "codigo": "intertravado",
+      "rotulo": "Intertravado",
       "definicao": "Blocos intertravados."
     },
     {
       "codigo": "pedra",
+      "rotulo": "Pedra",
       "definicao": "Pedra ou paralelepípedo."
     },
     {
       "codigo": "nao-informado",
+      "rotulo": "Não informado",
       "definicao": "Revestimento ainda não levantado."
     }
   ]

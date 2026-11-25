@@ -2,8 +2,10 @@
 Agregados protegem as invariantes não espaciais; as espaciais ficam na camada
 de validação semântica, que conhece o modelo do campus inteiro."""
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import Optional
+
 
 class RegraDeDominioViolada(ValueError):
     def __init__(self, regra: str, mensagem: str):
@@ -69,11 +71,12 @@ class Edificacao:
     def criar(cls, **dados) -> "Edificacao":
         if dados.get("localizacao") not in ("interna", "externa"):
             raise RegraDeDominioViolada("INV-12", "localização deve ser interna ou externa")
-        if dados["localizacao"] == "externa" and dados.get("endereco") is None:
-            raise RegraDeDominioViolada("INV-14", "edificação externa exige endereço")
-        end = dados.get("endereco")
-        if dados["localizacao"] == "externa" and str(dados["numero_mapa"].valor) != end.numero:
-            raise RegraDeDominioViolada("INV-15", "edificação externa: número do mapa deve ser o número do endereço")
+        if dados["localizacao"] == "externa":
+            end = dados.get("endereco")
+            if end is None:
+                raise RegraDeDominioViolada("INV-14", "edificação externa exige endereço")
+            if str(dados["numero_mapa"].valor) != end.numero:
+                raise RegraDeDominioViolada("INV-15", "edificação externa: número do mapa deve ser o número do endereço")
         if dados["geometria"].tipo != "Polygon":
             raise RegraDeDominioViolada("INV-03", "edificação exige geometria poligonal")
         return cls(**dados)

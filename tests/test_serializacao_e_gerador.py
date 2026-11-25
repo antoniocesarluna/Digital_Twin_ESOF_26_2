@@ -1,9 +1,12 @@
 import xml.etree.ElementTree as ET
+
 import pytest
-from pyld import jsonld
-from campus_domain import de_dict, para_dict, para_gml, para_jsonld, gerar_campus, validar_modelo
-from campus_domain.serializacao.gml import NS
 from conftest import carregar
+from pyld import jsonld
+
+from campus_domain import de_dict, gerar_campus, para_dict, para_gml, para_jsonld, validar_modelo
+from campus_domain.serializacao.gml import NS
+
 
 @pytest.mark.parametrize("i", range(12))
 def test_round_trip_documento_dominio_documento(modelo, i):

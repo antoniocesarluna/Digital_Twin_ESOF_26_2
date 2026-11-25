@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "campus-domain"
+version = "1.0.0"
+description = "Bounded Context Campus Domain (Grupo 1) — Gêmeo Digital Urbano do Campus, PPGCA Mackenzie"
+requires-python = ">=3.11"
+authors = [{ name = "Antonio César Luna" }, { name = "Rodolfo Marino de Oliveira" }]
+dependencies = ["jsonschema>=4.18", "referencing", "shapely>=2.0", "pyproj>=3.6"]
+
+[project.optional-dependencies]
+jsonld = ["pyld"]
+dev = ["pytest", "pytest-cov", "pyld", "openapi-spec-validator", "ruff", "mypy"]
+
+[tool.setuptools.packages.find]
+include = ["campus_domain*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E701", "E702", "E731"]
+
+[tool.ruff.lint.per-file-ignores]
+"tools/*" = ["E501", "E402"]
+"tests/*" = ["E501", "E741"]

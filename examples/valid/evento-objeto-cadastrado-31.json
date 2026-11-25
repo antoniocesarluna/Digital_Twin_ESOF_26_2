@@ -1,0 +1,15 @@
+{
+  "idEvento": "0b6f1c2e-6d1a-4c47-9b1e-000000000001",
+  "tipo": "ObjetoUrbanoCadastrado",
+  "versaoContrato": "1.0.0",
+  "ocorridoEm": "2026-11-25T10:05:00-03:00",
+  "origem": {
+    "grupo": "G3",
+    "usuario": "gestor.suinf"
+  },
+  "objetoId": "urn:upm:campus-hig:edificacao:31",
+  "dados": {
+    "tipoObjeto": "Edificacao",
+    "versao": 1
+  }
+}

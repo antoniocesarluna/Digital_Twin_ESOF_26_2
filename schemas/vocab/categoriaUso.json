@@ -1,41 +1,54 @@
 {
+  "$schema": "https://gemeo-campus.example/schemas/1.0.0/vocabulario.schema.json",
   "vocabulario": "categoriaUso",
-  "versao": "0.1.0",
+  "versao": "1.0.0",
+  "usadoEm": [
+    "Edificacao.categoriaUso"
+  ],
   "termos": [
     {
       "codigo": "ensino",
+      "rotulo": "Ensino",
       "definicao": "Edificação destinada predominantemente a aulas de graduação ou pós-graduação."
     },
     {
       "codigo": "pesquisa",
+      "rotulo": "Pesquisa e inovação",
       "definicao": "Laboratórios e núcleos de pesquisa e inovação."
     },
     {
       "codigo": "administrativo",
+      "rotulo": "Administrativo",
       "definicao": "Serviços administrativos, atendimento e apoio."
     },
     {
       "codigo": "cultural",
+      "rotulo": "Cultural",
       "definicao": "Centros culturais, históricos, bibliotecas e auditórios."
     },
     {
       "codigo": "religioso",
+      "rotulo": "Religioso",
       "definicao": "Capela e espaços de culto."
     },
     {
       "codigo": "esportivo",
+      "rotulo": "Esportivo",
       "definicao": "Ginásios e instalações esportivas cobertas."
     },
     {
       "codigo": "alimentacao",
+      "rotulo": "Alimentação",
       "definicao": "Lanchonetes e restaurantes."
     },
     {
       "codigo": "educacao-basica",
+      "rotulo": "Educação básica (Colégio)",
       "definicao": "Edificações do Colégio Presbiteriano Mackenzie."
     },
     {
       "codigo": "misto",
+      "rotulo": "Uso misto",
       "definicao": "Edificação com mais de um uso relevante."
     }
   ]

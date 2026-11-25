@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/1.0.0/evento-de-dominio.schema.json",
+  "title": "Evento de domínio do Campus Domain",
+  "description": "Mensagem publicada pelo G3 no broker (tópico campus.<tipo>) e consumida por G2, G4 e G5.",
+  "type": "object",
+  "required": [
+    "idEvento",
+    "tipo",
+    "versaoContrato",
+    "ocorridoEm",
+    "origem",
+    "objetoId",
+    "dados"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "idEvento": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "tipo": {
+      "enum": [
+        "ObjetoUrbanoCadastrado",
+        "GeometriaAtualizada",
+        "PavimentoAdicionado",
+        "ObjetoUrbanoDesativado"
+      ]
+    },
+    "versaoContrato": {
+      "const": "1.0.0"
+    },
+    "ocorridoEm": {
+      "$ref": "comum.schema.json#/$defs/DataHora"
+    },
+    "origem": {
+      "type": "object",
+      "required": [
+        "grupo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "grupo": {
+          "enum": [
+            "G1",
+            "G2",
+            "G3",
+            "G4",
+            "G5"
+          ]
+        },
+        "usuario": {
+          "type": "string"
+        }
+      }
+    },
+    "objetoId": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "dados": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "tipo"
+        ],
+        "properties": {
+          "tipo": {
+            "const": "ObjetoUrbanoCadastrado"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dados": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tipoObjeto",
+              "versao"
+            ],
+            "properties": {
+              "tipoObjeto": {
+                "enum": [
+                  "Edificacao",
+                  "Via",
+                  "PontoDeInteresse",
+                  "AreaVerde"
+                ]
+              },
+              "versao": {
+                "const": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "tipo"
+        ],
+        "properties": {
+          "tipo": {
+            "const": "GeometriaAtualizada"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dados": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "versaoAnterior",
+              "versaoNova"
+            ],
+            "properties": {
+              "versaoAnterior": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "versaoNova": {
+                "type": "integer",
+                "minimum": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "tipo"
+        ],
+        "properties": {
+          "tipo": {
+            "const": "PavimentoAdicionado"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dados": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "pavimentoId",
+              "numero"
+            ],
+            "properties": {
+              "pavimentoId": {
+                "$ref": "comum.schema.json#/$defs/Identificador"
+              },
+              "numero": {
+                "type": "integer",
+                "minimum": -5,
+                "maximum": 60
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "tipo"
+        ],
+        "properties": {
+          "tipo": {
+            "const": "ObjetoUrbanoDesativado"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dados": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "motivo"
+            ],
+            "properties": {
+              "motivo": {
+                "type": "string",
+                "minLength": 5
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

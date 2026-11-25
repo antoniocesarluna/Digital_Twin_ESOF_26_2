@@ -1,6 +1,6 @@
 """Tradução documento (dict conforme o contrato) <-> objetos de domínio."""
-from .dominio import (Identificador, NumeroMapa, Endereco, Geometria, Pavimento, Edificacao,
-                      Via, PontoDeInteresse, AreaVerde)
+from .dominio import AreaVerde, Edificacao, Endereco, Geometria, Identificador, NumeroMapa, Pavimento, PontoDeInteresse, Via
+
 
 def _tup(c):
     return tuple(_tup(x) for x in c) if isinstance(c, list) else c

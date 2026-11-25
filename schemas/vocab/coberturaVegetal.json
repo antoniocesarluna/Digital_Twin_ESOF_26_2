@@ -1,21 +1,29 @@
 {
+  "$schema": "https://gemeo-campus.example/schemas/1.0.0/vocabulario.schema.json",
   "vocabulario": "coberturaVegetal",
-  "versao": "0.1.0",
+  "versao": "1.0.0",
+  "usadoEm": [
+    "AreaVerde.cobertura"
+  ],
   "termos": [
     {
       "codigo": "arborea",
+      "rotulo": "Arbórea",
       "definicao": "Predomínio de árvores."
     },
     {
       "codigo": "gramado",
+      "rotulo": "Gramado",
       "definicao": "Predomínio de gramíneas."
     },
     {
       "codigo": "jardim",
+      "rotulo": "Jardim",
       "definicao": "Canteiros ornamentais."
     },
     {
       "codigo": "misto",
+      "rotulo": "Mista",
       "definicao": "Combinação de coberturas."
     }
   ]

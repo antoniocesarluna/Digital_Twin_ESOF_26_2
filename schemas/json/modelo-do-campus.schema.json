@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://gemeo-campus.example/schemas/0.1.0/modelo-do-campus.schema.json",
+  "$id": "https://gemeo-campus.example/schemas/1.0.0/modelo-do-campus.schema.json",
   "title": "Modelo do Campus (instantâneo para validação de consistência espacial)",
   "type": "object",
   "required": [
@@ -11,7 +11,7 @@
   "additionalProperties": false,
   "properties": {
     "versaoContrato": {
-      "const": "0.1.0"
+      "const": "1.0.0"
     },
     "campus": {
       "type": "object",

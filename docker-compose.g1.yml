@@ -1,0 +1,11 @@
+# Serviços do G1 para o docker-compose coletivo (junto ao 3DCityDB do G2).
+# Uso isolado: docker compose -f docker-compose.g1.yml up
+services:
+  g1-campus-domain:            # serviço real: vocabulários, schemas, fixtures, validação e conversões
+    build: .
+    ports: ["8001:8001"]
+  g1-mock:                     # mock gerado do OpenAPI (RNF10): outros grupos testam sem o serviço real
+    image: stoplight/prism:5
+    command: mock -h 0.0.0.0 -p 4010 /api/openapi/campus-domain.openapi.json
+    volumes: ["./openapi:/api/openapi:ro", "./schemas:/api/schemas:ro"]
+    ports: ["4011:4010"]

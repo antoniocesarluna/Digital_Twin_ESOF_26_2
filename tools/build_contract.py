@@ -2,11 +2,14 @@
 e os exemplos válidos/inválidos derivados do mapa do Campus Higienópolis.
 As geometrias são ESQUEMÁTICAS: posições do mapa ilustrativo convertidas para
 SIRGAS 2000 / UTM 23S por transformação afim aproximada (sem georreferenciamento)."""
-import json, pathlib, copy
+import copy
+import json
+import pathlib
+
 from pyproj import Transformer
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-VERSAO = "0.1.0"
+VERSAO = "1.0.0"
 BASE = "https://gemeo-campus.example/schemas/" + VERSAO + "/"
 CRS = "EPSG:31983"
 
@@ -45,13 +48,41 @@ VOCAB = {
    "arborea": "Predomínio de árvores.", "gramado": "Predomínio de gramíneas.",
    "jardim": "Canteiros ornamentais.", "misto": "Combinação de coberturas."},
  "situacao": {
-   "ativo": "Em uso.", "planejado": "Aprovado, ainda não construído.",
+   "ativo": "Em uso regular pela universidade.", "planejado": "Aprovado, ainda não construído.",
    "em-obra": "Em construção ou reforma que altera geometria.",
    "desativado": "Fora de uso; mantido para histórico."},
 }
+# Rótulos de exibição: consumo OBRIGATÓRIO pelo G5 em filtros, legendas e popups (ADR-010)
+ROTULOS = {
+ "categoriaUso": {"ensino": "Ensino", "pesquisa": "Pesquisa e inovação", "administrativo": "Administrativo",
+   "cultural": "Cultural", "religioso": "Religioso", "esportivo": "Esportivo", "alimentacao": "Alimentação",
+   "educacao-basica": "Educação básica (Colégio)", "misto": "Uso misto"},
+ "categoriaPontoDeInteresse": {"portaria": "Portaria", "atendimento": "Atendimento", "achados-e-perdidos": "Achados e Perdidos",
+   "alimentacao": "Alimentação", "auditorio": "Auditório", "quadra-esportiva": "Quadra esportiva", "servico": "Serviço"},
+ "classeVia": {"publica": "Via pública", "interna": "Via interna"},
+ "revestimento": {"asfalto": "Asfalto", "concreto": "Concreto", "intertravado": "Intertravado", "pedra": "Pedra",
+   "nao-informado": "Não informado"},
+ "coberturaVegetal": {"arborea": "Arbórea", "gramado": "Gramado", "jardim": "Jardim", "misto": "Mista"},
+ "situacao": {"ativo": "Ativo", "planejado": "Planejado", "em-obra": "Em obra", "desativado": "Desativado"},
+}
+USO_VOCAB = {"categoriaUso": ["Edificacao.categoriaUso"], "categoriaPontoDeInteresse": ["PontoDeInteresse.categoria"],
+  "classeVia": ["Via.classe"], "revestimento": ["Via.revestimento"], "coberturaVegetal": ["AreaVerde.cobertura"],
+  "situacao": ["Edificacao.situacao"]}
+assert all(set(VOCAB[k]) == set(ROTULOS[k]) for k in VOCAB), "todo termo precisa de rótulo"
 for k, v in VOCAB.items():
-    dump(f"schemas/vocab/{k}.json", {"vocabulario": k, "versao": VERSAO,
-         "termos": [{"codigo": c, "definicao": d} for c, d in v.items()]})
+    dump(f"schemas/vocab/{k}.json", {"$schema": BASE + "vocabulario.schema.json", "vocabulario": k, "versao": VERSAO,
+         "usadoEm": USO_VOCAB[k],
+         "termos": [{"codigo": c, "rotulo": ROTULOS[k][c], "definicao": d} for c, d in v.items()]})
+dump("schemas/vocab/index.json", {"versao": VERSAO, "vocabularios": [
+     {"nome": k, "arquivo": f"{k}.json", "usadoEm": USO_VOCAB[k], "termos": len(VOCAB[k])} for k in VOCAB]})
+VOCAB_SCHEMA = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": BASE + "vocabulario.schema.json",
+  "title": "Vocabulário controlado do Campus Domain (consumo obrigatório pelo G5)", "type": "object",
+  "required": ["vocabulario", "versao", "usadoEm", "termos"], "properties": {
+    "$schema": {"type": "string"}, "vocabulario": {"type": "string"}, "versao": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "usadoEm": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "termos": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["codigo", "rotulo", "definicao"],
+      "additionalProperties": False, "properties": {"codigo": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+      "rotulo": {"type": "string", "minLength": 2}, "definicao": {"type": "string", "minLength": 10}}}}}}
 enum = lambda k: {"enum": list(VOCAB[k])}
 
 # ---------------- JSON Schema 2020-12 ----------------
@@ -82,9 +113,12 @@ COMUM = {
         "complemento": {"type": "string"},
         "municipio": {"const": "São Paulo"}, "uf": {"const": "SP"}}},
   "Situacao": enum("situacao"),
-  "Metadados": {"type": "object", "required": ["versao"], "properties": {
-        "versao": {"type": "integer", "minimum": 1},
-        "atualizadoEm": {"type": "string", "format": "date-time"},
+  "DataHora": {"type": "string", "description": "Data e hora ISO 8601 com fuso.",
+     "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"},
+  "Metadados": {"type": "object", "required": ["versao"], "additionalProperties": False, "properties": {
+        "versao": {"type": "integer", "minimum": 1, "description": "Versão do objeto (RF14); incrementa a cada alteração."},
+        "atualizadoEm": {"$ref": "#/$defs/DataHora"},
+        "alteradoPor": {"type": "string", "description": "Usuário com perfil de gestor que fez a alteração (auditoria)."},
         "fonte": {"type": "string"}}},
  }}
 def obj(title, tipo, props, req, extra=None):
@@ -138,7 +172,51 @@ MOD = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": BASE + 
             "description": "[minX, minY, maxX, maxY] em EPSG:31983 (RN-02)."}}},
      "objetos": {"type": "array", "items": {"oneOf": [{"$ref": "edificacao.schema.json"}, {"$ref": "via.schema.json"},
          {"$ref": "ponto-de-interesse.schema.json"}, {"$ref": "area-verde.schema.json"}]}}}}
-for name, s in [("comum", COMUM), ("edificacao", EDF), ("via", VIA), ("ponto-de-interesse", POI),
+EVENTOS = {
+ "ObjetoUrbanoCadastrado": {"required": ["tipoObjeto", "versao"], "properties": {
+     "tipoObjeto": {"enum": list(tipo_slug)}, "versao": {"const": 1}}},
+ "GeometriaAtualizada": {"required": ["versaoAnterior", "versaoNova"], "properties": {
+     "versaoAnterior": {"type": "integer", "minimum": 1}, "versaoNova": {"type": "integer", "minimum": 2}}},
+ "PavimentoAdicionado": {"required": ["pavimentoId", "numero"], "properties": {
+     "pavimentoId": {"$ref": C + "Identificador"}, "numero": {"type": "integer", "minimum": -5, "maximum": 60}}},
+ "ObjetoUrbanoDesativado": {"required": ["motivo"], "properties": {"motivo": {"type": "string", "minLength": 5}}},
+}
+EVT = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": BASE + "evento-de-dominio.schema.json",
+  "title": "Evento de domínio do Campus Domain",
+  "description": "Mensagem publicada pelo G3 no broker (tópico campus.<tipo>) e consumida por G2, G4 e G5.",
+  "type": "object", "required": ["idEvento", "tipo", "versaoContrato", "ocorridoEm", "origem", "objetoId", "dados"],
+  "additionalProperties": False, "properties": {
+    "idEvento": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "tipo": {"enum": list(EVENTOS)}, "versaoContrato": {"const": VERSAO}, "ocorridoEm": {"$ref": C + "DataHora"},
+    "origem": {"type": "object", "required": ["grupo"], "additionalProperties": False, "properties": {
+       "grupo": {"enum": ["G1", "G2", "G3", "G4", "G5"]}, "usuario": {"type": "string"}}},
+    "objetoId": {"$ref": C + "Identificador"}, "dados": {"type": "object"}},
+  "allOf": [{"if": {"required": ["tipo"], "properties": {"tipo": {"const": t}}},
+             "then": {"properties": {"dados": {"type": "object", "additionalProperties": False, **spec}}}} for t, spec in EVENTOS.items()]}
+OBJ_REFS = [{"$ref": "edificacao.schema.json"}, {"$ref": "via.schema.json"},
+            {"$ref": "ponto-de-interesse.schema.json"}, {"$ref": "area-verde.schema.json"}]
+HIST = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": BASE + "historico-do-objeto.schema.json",
+  "title": "Histórico de versões de um objeto urbano (RF14)",
+  "description": "Cada versão é um retrato completo do objeto com período de validade; persistido pelo G2.",
+  "type": "object", "required": ["objetoId", "versoes"], "additionalProperties": False, "properties": {
+    "objetoId": {"$ref": C + "Identificador"},
+    "versoes": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": False,
+      "required": ["versao", "validoDe", "alteradoPor", "motivo", "objeto"], "properties": {
+        "versao": {"type": "integer", "minimum": 1}, "validoDe": {"$ref": C + "DataHora"},
+        "validoAte": {"$ref": C + "DataHora"}, "alteradoPor": {"type": "string", "minLength": 2},
+        "motivo": {"type": "string", "minLength": 5}, "objeto": {"oneOf": OBJ_REFS}}}}}}
+REL = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": BASE + "relatorio-de-validacao.schema.json",
+  "title": "Relatório de validação do Campus Domain (RF-06)",
+  "description": "Devolvido por validar_documento() e por POST /validacao; o G3 o repassa na própria API.",
+  "type": "object", "required": ["valido", "erros"], "additionalProperties": False, "properties": {
+    "valido": {"type": "boolean"},
+    "erros": {"type": "array", "items": {"type": "object", "required": ["codigo", "regra", "local", "mensagem"],
+      "additionalProperties": False, "properties": {
+        "codigo": {"type": "string", "pattern": "^G1-[A-Z]{3}-[0-9]{3}$"},
+        "regra": {"type": "string", "pattern": "^(INV-[0-9]{2}|SCHEMA)$"},
+        "local": {"type": "string", "description": "JSON Pointer do ponto do documento com problema."},
+        "mensagem": {"type": "string", "description": "Mensagem em português com os termos do glossário."}}}}}}
+for name, s in [("relatorio-de-validacao", REL), ("evento-de-dominio", EVT), ("historico-do-objeto", HIST), ("vocabulario", VOCAB_SCHEMA), ("comum", COMUM), ("edificacao", EDF), ("via", VIA), ("ponto-de-interesse", POI),
                 ("area-verde", AV), ("modelo-do-campus", MOD)]:
     dump(f"schemas/json/{name}.schema.json", s)
 
@@ -163,38 +241,6 @@ CTX = {"@context": {"@version": 1.1,
   "uf": "schema:addressRegion", "crs": "campus:crs",
   "geometria": {"@id": "geo:hasGeometry", "@type": "@json"}, "metadados": {"@id": "campus:metadados", "@type": "@json"}}}
 dump("schemas/jsonld/context.jsonld", CTX)
-
-# ---------------- XSD do perfil (extensão ADE) ----------------
-cats = "".join(f'        <xs:enumeration value="{c}"/>\n' for c in VOCAB["categoriaUso"])
-XSD = f'''<?xml version="1.0" encoding="UTF-8"?>
-<!-- Campus Domain ADE v{VERSAO}: atributos do domínio acrescentados às classes CityGML 3.0.
-     Os elementos abaixo são usados dentro de bldg:Building, bldg:Storey, tran:Road,
-     veg:PlantCover e gen:GenericOccupiedSpace. Os schemas oficiais da OGC são
-     referenciados (não copiados) no perfil completo validado no CI (Sprint 3). -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:campus="urn:upm:campus-hig:ade:{VERSAO}"
-           targetNamespace="urn:upm:campus-hig:ade:{VERSAO}"
-           elementFormDefault="qualified" version="{VERSAO}">
-  <xs:simpleType name="NumeroMapaType">
-    <xs:restriction base="xs:positiveInteger"><xs:maxInclusive value="999"/></xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="LocalizacaoType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="interna"/><xs:enumeration value="externa"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="CategoriaUsoType">
-    <xs:restriction base="xs:string">
-{cats}    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="numeroMapa" type="campus:NumeroMapaType"/>
-  <xs:element name="localizacao" type="campus:LocalizacaoType"/>
-  <xs:element name="categoriaUso" type="campus:CategoriaUsoType"/>
-  <xs:element name="homenageado" type="xs:string"/>
-  <xs:element name="unidadeOcupante" type="xs:string"/>
-</xs:schema>
-'''
-(ROOT / "schemas/xsd/campus-ade.xsd").write_text(XSD, encoding="utf-8")
 
 # ---------------- exemplos a partir do mapa ----------------
 # Âncora aproximada: pixel (700,600) do mapa ≈ (-46.6519, -23.5470) WGS 84; escala 0,28 m/pixel.
@@ -268,6 +314,28 @@ for o in VALID:
 modelo = {"versaoContrato": VERSAO, "campus": CAMPUS, "objetos": VALID}
 dump("examples/valid/modelo-campus-higienopolis.json", modelo)
 
+def hist_41():
+    v1 = copy.deepcopy(ed41); v1["metadados"] = {"versao": 1, "atualizadoEm": "2024-03-01T09:00:00-03:00",
+        "alteradoPor": "gestor.suinf", "fonte": meta["fonte"]}
+    v1["pavimentos"][1].pop("unidadesOcupantes")
+    v2 = copy.deepcopy(ed41); v2["metadados"] = {"versao": 2, "atualizadoEm": "2026-11-25T10:00:00-03:00",
+        "alteradoPor": "gestor.suinf", "fonte": meta["fonte"]}
+    return {"objetoId": ed41["id"], "versoes": [
+      {"versao": 1, "validoDe": "2024-03-01T09:00:00-03:00", "validoAte": "2026-11-25T10:00:00-03:00",
+       "alteradoPor": "gestor.suinf", "motivo": "Carga inicial a partir do mapa do campus 2024", "objeto": v1},
+      {"versao": 2, "validoDe": "2026-11-25T10:00:00-03:00", "alteradoPor": "gestor.suinf",
+       "motivo": "Registro da Coordenadoria Geral de Pós-Graduação no 8º pavimento", "objeto": v2}]}
+dump("examples/valid/historico-edificacao-41.json", hist_41())
+EV = lambda n, t, oid, dados, quando: {"idEvento": f"0b6f1c2e-6d1a-4c47-9b1e-0000000000{n:02d}", "tipo": t,
+    "versaoContrato": VERSAO, "ocorridoEm": quando, "origem": {"grupo": "G3", "usuario": "gestor.suinf"},
+    "objetoId": oid, "dados": dados}
+dump("examples/valid/evento-objeto-cadastrado-31.json", EV(1, "ObjetoUrbanoCadastrado", ed31["id"],
+     {"tipoObjeto": "Edificacao", "versao": 1}, "2026-11-25T10:05:00-03:00"))
+dump("examples/valid/evento-pavimento-adicionado-41.json", EV(2, "PavimentoAdicionado", ed41["id"],
+     {"pavimentoId": U + "pavimento:41-8", "numero": 8}, "2026-11-25T10:06:00-03:00"))
+dump("examples/valid/evento-geometria-atualizada-bosque.json", EV(3, "GeometriaAtualizada", av["id"],
+     {"versaoAnterior": 1, "versaoNova": 2}, "2026-11-25T10:07:00-03:00"))
+
 # Inválidos: cada um viola exatamente uma regra (código esperado em _esperado)
 def inv(nome, base, mut, codigo, regra, colecao=False):
     o = copy.deepcopy(base); mut(o)
@@ -298,5 +366,10 @@ inv("inv-12-interna-fora-do-perimetro", ed358, lambda o: (o.update(id=U+"edifica
 inv("inv-13-portaria-fora-do-perimetro", port07, lambda o: o.update(id=U+"poi:portaria-99", numeroPortaria=99,
     geometria=pt(913, 1060)), "G1-ESP-013", "INV-13", True)
 inv("inv-15-externa-numero-difere-do-endereco", ed358, s("numeroMapa", 359), "G1-AGR-015", "INV-15")
+h = hist_41(); h["versoes"][1]["versao"] = 3
+dump("examples/invalid/inv-16-historico-com-lacuna-de-versao.json",
+     {"_esperado": {"codigo": "G1-HIS-016", "regra": "INV-16"}, "documento": h})
+dump("examples/invalid/inv-17-evento-salta-versao.json", {"_esperado": {"codigo": "G1-EVT-017", "regra": "INV-17"},
+     "documento": EV(4, "GeometriaAtualizada", av["id"], {"versaoAnterior": 1, "versaoNova": 3}, "2026-11-25T10:08:00-03:00")})
 inv("inv-14-externa-sem-endereco", ed358, lambda o: o.pop("endereco"), "G1-SCH-001", "INV-14")
 print("contrato", VERSAO, "gerado; origem UTM", round(E0, 1), round(N0, 1))

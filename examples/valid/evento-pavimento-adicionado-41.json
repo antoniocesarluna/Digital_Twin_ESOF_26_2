@@ -1,0 +1,15 @@
+{
+  "idEvento": "0b6f1c2e-6d1a-4c47-9b1e-000000000002",
+  "tipo": "PavimentoAdicionado",
+  "versaoContrato": "1.0.0",
+  "ocorridoEm": "2026-11-25T10:06:00-03:00",
+  "origem": {
+    "grupo": "G3",
+    "usuario": "gestor.suinf"
+  },
+  "objetoId": "urn:upm:campus-hig:edificacao:41",
+  "dados": {
+    "pavimentoId": "urn:upm:campus-hig:pavimento:41-8",
+    "numero": 8
+  }
+}

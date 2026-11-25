@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gemeo-campus.example/schemas/1.0.0/historico-do-objeto.schema.json",
+  "title": "Histórico de versões de um objeto urbano (RF14)",
+  "description": "Cada versão é um retrato completo do objeto com período de validade; persistido pelo G2.",
+  "type": "object",
+  "required": [
+    "objetoId",
+    "versoes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "objetoId": {
+      "$ref": "comum.schema.json#/$defs/Identificador"
+    },
+    "versoes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "versao",
+          "validoDe",
+          "alteradoPor",
+          "motivo",
+          "objeto"
+        ],
+        "properties": {
+          "versao": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "validoDe": {
+            "$ref": "comum.schema.json#/$defs/DataHora"
+          },
+          "validoAte": {
+            "$ref": "comum.schema.json#/$defs/DataHora"
+          },
+          "alteradoPor": {
+            "type": "string",
+            "minLength": 2
+          },
+          "motivo": {
+            "type": "string",
+            "minLength": 5
+          },
+          "objeto": {
+            "oneOf": [
+              {
+                "$ref": "edificacao.schema.json"
+              },
+              {
+                "$ref": "via.schema.json"
+              },
+              {
+                "$ref": "ponto-de-interesse.schema.json"
+              },
+              {
+                "$ref": "area-verde.schema.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

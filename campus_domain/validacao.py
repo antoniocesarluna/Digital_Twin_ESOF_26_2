@@ -2,12 +2,18 @@
 1) sintática — JSON Schema 2020-12 do contrato;
 2) semântica — regras que o schema não expressa (geometria, agregado, consistência espacial)."""
 from __future__ import annotations
-import json, pathlib
-from dataclasses import dataclass, field, asdict
+
+import json
+import pathlib
+from dataclasses import asdict, dataclass, field
+
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
-from shapely.geometry import shape, box as shp_box
+from shapely.geometry import box as shp_box
+from shapely.geometry import shape
 from shapely.validation import explain_validity
+
+from .auditoria import auditar_validacao
 
 SCHEMAS = pathlib.Path(__file__).resolve().parents[1] / "schemas" / "json"
 _TIPO_ARQ = {"Edificacao": "edificacao", "Via": "via", "PontoDeInteresse": "ponto-de-interesse",
@@ -75,7 +81,7 @@ def _semantica_objeto(d, rel, base=""):
         if d["localizacao"] == "externa" and end and str(d["numeroMapa"]) != end["numero"]:
             rel.add("G1-AGR-015", "INV-15", base + "/numeroMapa",
                     f"edificação externa: número do mapa ({d['numeroMapa']}) difere do número do endereço ({end['numero']})")
-        nums = {}
+        nums: dict[int, int] = {}
         for i, p in enumerate(d.get("pavimentos", [])):
             loc = f"{base}/pavimentos/{i}"
             if p["numero"] in nums:
@@ -87,16 +93,18 @@ def _semantica_objeto(d, rel, base=""):
                 rel.add("G1-AGR-004", "INV-04", loc + "/geometria",
                         f"pavimento {p['numero']} extrapola a projeção da edificação {d['numeroMapa']}")
 
+@auditar_validacao
 def validar(doc: dict) -> RelatorioDeValidacao:
     """Valida um objeto urbano isolado (regras do próprio agregado)."""
     rel = RelatorioDeValidacao()
-    v = _VAL.get(doc.get("tipo"))
+    v = _VAL.get(str(doc.get("tipo")))
     if v is None:
         rel.add("G1-SCH-001", "SCHEMA", "/tipo", f"tipo desconhecido: {doc.get('tipo')}"); return rel
     _validar_schema(v, doc, rel)
     if rel.valido: _semantica_objeto(doc, rel)
     return rel
 
+@auditar_validacao
 def validar_modelo(modelo: dict) -> RelatorioDeValidacao:
     """Valida um instantâneo do campus: agregados + consistência espacial entre eles."""
     rel = RelatorioDeValidacao()
@@ -106,7 +114,8 @@ def validar_modelo(modelo: dict) -> RelatorioDeValidacao:
     for i, o in enumerate(objs): _semantica_objeto(o, rel, f"/objetos/{i}")
     if not rel.valido: return rel
     perim = shape(modelo["campus"]["perimetro"]); adi = shp_box(*modelo["campus"]["areaDeInteresse"])
-    ids, nums = {}, {}
+    ids: dict[str, int] = {}
+    nums: dict[tuple, int] = {}
     geos = [shape(o["geometria"]) for o in objs]
     for i, (o, g) in enumerate(zip(objs, geos)):
         loc = f"/objetos/{i}"
@@ -142,3 +151,60 @@ def validar_modelo(modelo: dict) -> RelatorioDeValidacao:
                 rel.add("G1-ESP-008", "INV-08", f"/objetos/{i}/geometria",
                         f"área verde '{o['nome']}' sobrepõe a edificação {objs[j]['numeroMapa']}")
     return rel
+
+# ---------- RF14: histórico de versões (INV-16) ----------
+_VAL_HIST = _validador("historico-do-objeto")
+_VAL_EVT = _validador("evento-de-dominio")
+
+def _ts(s):
+    from datetime import datetime
+    return datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+@auditar_validacao
+def validar_historico(hist: dict) -> RelatorioDeValidacao:
+    """Versões 1..n sem lacunas, períodos contíguos e crescentes, só a última em aberto,
+    todas do mesmo objeto e cada retrato válido pelas regras do agregado."""
+    rel = RelatorioDeValidacao()
+    _validar_schema(_VAL_HIST, hist, rel)
+    if not rel.valido: return rel
+    vs = hist["versoes"]
+    for i, v in enumerate(vs):
+        loc = f"/versoes/{i}"
+        if v["versao"] != i + 1:
+            rel.add("G1-HIS-016", "INV-16", loc + "/versao", f"versão {v['versao']} fora de sequência (esperada {i + 1})")
+        if v["objeto"]["id"] != hist["objetoId"]:
+            rel.add("G1-HIS-016", "INV-16", loc + "/objeto/id", "a versão pertence a outro objeto")
+        mv = v["objeto"].get("metadados", {}).get("versao")
+        if mv is not None and mv != v["versao"]:
+            rel.add("G1-HIS-016", "INV-16", loc + "/objeto/metadados/versao", f"metadados.versao={mv} difere da versão {v['versao']}")
+        ultima = i == len(vs) - 1
+        if ultima and "validoAte" in v:
+            rel.add("G1-HIS-016", "INV-16", loc + "/validoAte", "a versão vigente não pode ter fim de validade")
+        if not ultima:
+            if "validoAte" not in v:
+                rel.add("G1-HIS-016", "INV-16", loc + "/validoAte", "versão encerrada sem fim de validade")
+            elif v["validoAte"] != vs[i + 1]["validoDe"] or _ts(v["validoAte"]) <= _ts(v["validoDe"]):
+                rel.add("G1-HIS-016", "INV-16", loc + "/validoAte", "períodos de validade devem ser contíguos e crescentes")
+        for e in validar(v["objeto"]).erros:
+            rel.add(e.codigo, e.regra, loc + "/objeto" + e.local.rstrip("/"), e.mensagem)
+    return rel
+
+# ---------- Eventos de domínio (INV-17) ----------
+@auditar_validacao
+def validar_evento(evt: dict) -> RelatorioDeValidacao:
+    rel = RelatorioDeValidacao()
+    _validar_schema(_VAL_EVT, evt, rel)
+    if not rel.valido: return rel
+    d = evt["dados"]
+    if evt["tipo"] == "GeometriaAtualizada" and d["versaoNova"] != d["versaoAnterior"] + 1:
+        rel.add("G1-EVT-017", "INV-17", "/dados/versaoNova", "a versão deve avançar exatamente uma unidade")
+    if evt["tipo"] == "PavimentoAdicionado" and ":edificacao:" not in evt["objetoId"]:
+        rel.add("G1-EVT-017", "INV-17", "/objetoId", "PavimentoAdicionado deve referir-se a uma edificação")
+    return rel
+
+def validar_documento(doc: dict) -> RelatorioDeValidacao:
+    """Ponto único de entrada (serviço HTTP e G3): detecta o tipo de documento."""
+    if "objetos" in doc: return validar_modelo(doc)
+    if "versoes" in doc: return validar_historico(doc)
+    if "idEvento" in doc: return validar_evento(doc)
+    return validar(doc)

@@ -1,13 +1,19 @@
 {
+  "$schema": "https://gemeo-campus.example/schemas/1.0.0/vocabulario.schema.json",
   "vocabulario": "classeVia",
-  "versao": "0.1.0",
+  "versao": "1.0.0",
+  "usadoEm": [
+    "Via.classe"
+  ],
   "termos": [
     {
       "codigo": "publica",
+      "rotulo": "Via pública",
       "definicao": "Logradouro público que delimita ou dá acesso ao campus."
     },
     {
       "codigo": "interna",
+      "rotulo": "Via interna",
       "definicao": "Circulação interna de pedestres ou veículos dentro do perímetro."
     }
   ]

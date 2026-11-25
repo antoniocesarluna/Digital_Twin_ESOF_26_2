@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://gemeo-campus.example/schemas/0.1.0/comum.schema.json",
+  "$id": "https://gemeo-campus.example/schemas/1.0.0/comum.schema.json",
   "title": "Campus Domain — Value Objects comuns",
   "$defs": {
     "Identificador": {
@@ -126,19 +126,29 @@
         "desativado"
       ]
     },
+    "DataHora": {
+      "type": "string",
+      "description": "Data e hora ISO 8601 com fuso.",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
     "Metadados": {
       "type": "object",
       "required": [
         "versao"
       ],
+      "additionalProperties": false,
       "properties": {
         "versao": {
           "type": "integer",
-          "minimum": 1
+          "minimum": 1,
+          "description": "Versão do objeto (RF14); incrementa a cada alteração."
         },
         "atualizadoEm": {
+          "$ref": "#/$defs/DataHora"
+        },
+        "alteradoPor": {
           "type": "string",
-          "format": "date-time"
+          "description": "Usuário com perfil de gestor que fez a alteração (auditoria)."
         },
         "fonte": {
           "type": "string"

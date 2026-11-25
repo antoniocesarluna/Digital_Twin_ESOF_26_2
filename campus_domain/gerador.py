@@ -1,7 +1,10 @@
 """Gerador de dados sintéticos do campus (RF-13/RF-14), com semente reproduzível.
 Edificações em grade dentro do perímetro, sem sobreposição; modo inválido controlado."""
-import random, copy
-from shapely.geometry import shape, box
+import copy
+import random
+
+from shapely.geometry import box, shape
+
 
 def gerar_campus(modelo_base: dict, n: int = 20, semente: int = 42, violar: str | None = None) -> dict:
     rnd = random.Random(semente)

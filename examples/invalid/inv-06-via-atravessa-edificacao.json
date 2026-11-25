@@ -4,7 +4,7 @@
     "regra": "INV-06"
   },
   "documento": {
-    "versaoContrato": "0.1.0",
+    "versaoContrato": "1.0.0",
     "campus": {
       "id": "urn:upm:campus-hig:campus:higienopolis",
       "nome": "Campus Higienópolis",

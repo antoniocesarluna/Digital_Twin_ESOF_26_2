@@ -1,6 +1,20 @@
-import ast, pathlib, pytest
-from campus_domain.dominio import (RegraDeDominioViolada, Identificador, NumeroMapa, Geometria, Pavimento,
-                                   Edificacao, Endereco, PontoDeInteresse, PavimentoAdicionado)
+import ast
+import pathlib
+
+import pytest
+
+from campus_domain.dominio import (
+    Edificacao,
+    Endereco,
+    Geometria,
+    Identificador,
+    NumeroMapa,
+    Pavimento,
+    PavimentoAdicionado,
+    PontoDeInteresse,
+    RegraDeDominioViolada,
+)
+
 Q = ((((0, 0), (10, 0), (10, 10), (0, 10), (0, 0)),))
 def edf(**kw):
     base = dict(id=Identificador("urn:upm:campus-hig:edificacao:31"), numero_mapa=NumeroMapa(31), nome="FCI",

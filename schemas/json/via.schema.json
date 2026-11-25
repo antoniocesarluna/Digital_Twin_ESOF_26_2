@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://gemeo-campus.example/schemas/0.1.0/via.schema.json",
+  "$id": "https://gemeo-campus.example/schemas/1.0.0/via.schema.json",
   "title": "Via",
   "type": "object",
   "required": [
